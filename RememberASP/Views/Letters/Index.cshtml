@@ -1,0 +1,14 @@
+﻿@model LettersListVM
+@{
+    ViewData["Title"] = "ListView";
+}
+
+@foreach (LetterModel c in Model.dbContext.Letters)
+{
+    <div class="letters-div">
+        <a class="letter-card-link" asp-area="" asp-controller="Letters" asp-action="Letter" asp-route-letter="@c.Letter">
+            <p class="letter-card-Letter">@c.Letter</p>
+            <p class="letter-card-desc">@c.Description</p>
+        </a>
+    </div>
+}

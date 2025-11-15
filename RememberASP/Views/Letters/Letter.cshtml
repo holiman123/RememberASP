@@ -1,0 +1,15 @@
+﻿@model LetterModel
+@{
+
+}
+<div class="desc-letter-block">
+	@for (int i = 1; i < 6; i++)
+	{
+		<p class="desc-letter desc-font-@i">
+			@Model.Letter
+		</p>
+	}
+</div>
+<p class="desc-description">
+	@Model.Description
+</p>
