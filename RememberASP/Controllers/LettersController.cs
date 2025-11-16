@@ -21,5 +21,25 @@ namespace RememberASP.Controllers
         {
             return View(lettersDb.Letters.First(l => l.Letter == letter));
         }
+
+        //public IActionResult Add()
+        //{
+        //    return View();
+        //}
+
+        public IActionResult Add(string? letter, string? description)
+        {
+            if (letter is null && description is null)
+                return View(new AddLetterModel());
+
+            if (letter.Length != 1)
+                return View(new AddLetterModel(true));
+
+            var newLetter = new LetterModel(letter[0], description);
+            lettersDb.Add(newLetter);
+            lettersDb.SaveChanges();
+
+            return View("Letter", newLetter);
+        }
     }
 }

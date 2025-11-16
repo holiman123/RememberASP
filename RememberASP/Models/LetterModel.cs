@@ -2,7 +2,7 @@
 
 namespace RememberASP.Models;
 
-[Keyless]
+[PrimaryKey(nameof(Letter), [])]
 public class LetterModel
 {
     public char Letter { get; set; }

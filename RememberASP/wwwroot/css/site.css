@@ -66,6 +66,16 @@ a.letter-card-link:hover {
     margin-bottom: 40px;
 }
 
+.letter-card-add-plus {
+    font-size: 64px;
+}
+
+.letter-card-add-desc {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: dimgrey;
+}
+
 
 .desc-letter-block {
     
@@ -116,4 +126,18 @@ a.letter-card-link:hover {
 .test {
     background-color: aqua;
     color: aqua;
+}
+
+.footer-div {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.footer-copyright {
+    margin-left: 100px;
+}
+
+
+.form-class input[type="text"] {
+    margin: 5px;
 }

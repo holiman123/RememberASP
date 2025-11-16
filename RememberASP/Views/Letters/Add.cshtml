@@ -1,0 +1,13 @@
+﻿@model AddLetterModel
+@{
+}
+
+<form class="form-class" asp-controller="Letters" asp-action="Add">
+	<input type="text" name="letter"/>
+	<input type="text" name="description"/>
+	<input type="submit" value="Add"/>
+</form>
+
+<p>
+	@Model.ErrorDescription
+</p>
