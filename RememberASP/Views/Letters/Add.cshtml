@@ -2,12 +2,31 @@
 @{
 }
 
-<form class="form-class" asp-controller="Letters" asp-action="Add">
+<form id="form" class="form-class" asp-controller="Letters" asp-action="Add">
 	<input type="text" name="letter"/>
-	<input type="text" name="description"/>
-	<input type="submit" value="Add"/>
+	<textarea class="form-desc" name="description"></textarea>
+	<input type="submit" value="Submit"/>
 </form>
 
-<p>
+<p id="message">
 	@Model.ErrorDescription
 </p>
+
+<script>
+	document.getElementById("form").addEventListener("submit", async (e) => {
+		e.preventDefault();
+
+		const response = await fetch("@Url.Action("Add")", {method: "POST", body: new FormData(e.target)});
+
+		const json = await response.json();
+		const stat = response.status;
+		document.getElementById("message").innerHTML = stat;
+
+		if (stat == 200) {
+			window.location.href = json.url;
+		}
+		else {
+			document.getElementById("message").innerHTML = json.message;
+		}
+	});
+</script>

@@ -3,19 +3,26 @@
     ViewData["Title"] = "ListView";
 }
 
-@foreach (LetterModel c in Model.dbContext.Letters)
+@if (Model.dbContext.Database.CanConnect())
 {
-    <div class="letters-div">
+<div class="letters-div">
+    @foreach (LetterModel c in Model.dbContext.Letters)
+    {
         <a class="letter-card-link" asp-area="" asp-controller="Letters" asp-action="Letter" asp-route-letter="@c.Letter">
             <p class="letter-card-Letter">@c.Letter</p>
-            <p class="letter-card-desc">@c.Description</p>
+            <div>
+                <p class="letter-card-desc">@c.Description</p>
+            </div>
         </a>
-    </div>
-}
+    }
 
-<div class="letters-div">
     <a class="letter-card-link" asp-area="" asp-controller="Letters" asp-action="Add">
         <p class="letter-card-add-plus text-center">+</p>
         <p class="letter-card-add-desc text-center">Add letter card</p>
     </a>
 </div>
+}
+else
+{
+	<p class="text-center">Database connection error. Please try again later.</p>
+}

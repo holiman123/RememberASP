@@ -32,23 +32,25 @@ body {
 }
 
 .letters-div {
-    display: inline-flex;
-    justify-content: center;
-    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
 }
 
 .letter-card-link {
+    color: black;
+    text-decoration-line: none;
     width: 300px;
     margin: 10px;
     border-radius: 20px;
     padding-top: 20px;
-    color: black;
     background-color: ivory;
-    text-decoration-line: none;
     border-style: solid;
     border-color: grey;
     border-width: 2px;
     transition: transform 0.2s;
+    overflow: clip;
+    height: 225px;
 }
 
 a.letter-card-link:hover {
@@ -62,9 +64,12 @@ a.letter-card-link:hover {
 
 .letter-card-desc {
     margin-left: 30px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    height: calc(1em * 4.3);
+
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%);
 }
+
 
 .letter-card-add-plus {
     font-size: 64px;
@@ -138,6 +143,16 @@ a.letter-card-link:hover {
 }
 
 
-.form-class input[type="text"] {
-    margin: 5px;
+.form {
+    
+}
+
+.form-class > * {
+    margin: 25px;
+    display: block;
+}
+
+.form-desc {
+    height: 100px;
+    width: 300px;
 }

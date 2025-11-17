@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RememberASP.Models;
+using System.Security.Policy;
 
 namespace RememberASP.Controllers
 {
@@ -22,24 +23,33 @@ namespace RememberASP.Controllers
             return View(lettersDb.Letters.First(l => l.Letter == letter));
         }
 
-        //public IActionResult Add()
-        //{
-        //    return View();
-        //}
-
         public IActionResult Add(string? letter, string? description)
         {
             if (letter is null && description is null)
                 return View(new AddLetterModel());
 
             if (letter.Length != 1)
-                return View(new AddLetterModel(true));
+                return BadRequest(new
+                {
+                    message = "Length must be 1."
+                });
 
             var newLetter = new LetterModel(letter[0], description);
-            lettersDb.Add(newLetter);
+            if (lettersDb.Letters.Contains(newLetter))
+            {
+                // Update description
+                lettersDb.Letters.First(l => l.Letter == newLetter.Letter).Description = newLetter.Description;
+            }
+            else
+            {
+                lettersDb.Add(newLetter);
+            }
             lettersDb.SaveChanges();
 
-            return View("Letter", newLetter);
+            string? urlStr = Url.Action("Letter", "Letters", new { Letter = newLetter.Letter });
+            return Ok(new { url = urlStr });
+
+            //return View("Letter", newLetter);
         }
     }
 }
