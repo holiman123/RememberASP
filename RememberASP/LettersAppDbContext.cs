@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using RememberASP.Models;
 
 namespace RememberASP;
 
-public class LettersDbContext : DbContext
+public class LettersAppDbContext : IdentityDbContext<ApplicationUser>
 {
     public string ConnectionStr { get; set; }
 
-    public LettersDbContext(string connectionStr)
+    public LettersAppDbContext(string connectionStr)
     {
         ConnectionStr = connectionStr;
     }

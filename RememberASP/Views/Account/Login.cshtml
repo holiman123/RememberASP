@@ -1,0 +1,11 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+	<input type="text" name="email" placeholder="email" required />
+	<input type="password" name="password" placeholder="Password" required />
+	<input type="submit" value="Register" />
+</form>

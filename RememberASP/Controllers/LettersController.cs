@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using RememberASP.Models;
 using System.Security.Policy;
 
@@ -6,9 +8,9 @@ namespace RememberASP.Controllers
 {
     public class LettersController : Controller
     {
-        private LettersDbContext lettersDb;
+        private LettersAppDbContext lettersDb;
 
-        public LettersController(LettersDbContext lettersDb)
+        public LettersController(LettersAppDbContext lettersDb)
         {
             this.lettersDb = lettersDb;
         }
@@ -23,6 +25,7 @@ namespace RememberASP.Controllers
             return View(lettersDb.Letters.First(l => l.Letter == letter));
         }
 
+        [Authorize]
         public IActionResult Add(string? letter, string? description)
         {
             if (letter is null && description is null)

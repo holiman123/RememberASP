@@ -2,9 +2,9 @@
 
 public class LettersListVM
 {
-    public LettersDbContext dbContext { get; set; }
+    public LettersAppDbContext dbContext { get; set; }
 
-    public LettersListVM(LettersDbContext dbContext)
+    public LettersListVM(LettersAppDbContext dbContext)
     {
         this.dbContext = dbContext;
     }
