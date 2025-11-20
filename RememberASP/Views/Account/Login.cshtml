@@ -4,8 +4,12 @@
 @{
 }
 
-<form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+<form class="form-class" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
 	<input type="text" name="email" placeholder="email" required />
 	<input type="password" name="password" placeholder="Password" required />
-	<input type="submit" value="Register" />
+	<input type="submit" value="Login" />
 </form>
+
+<p>
+	@ViewData["Error"]
+</p>

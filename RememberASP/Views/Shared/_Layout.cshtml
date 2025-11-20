@@ -12,10 +12,10 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container-fluid mr-2">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RememberASP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -28,10 +28,16 @@
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <p>@User.Identity.Name</p>
-                    <a asp-controller="Account" asp-action="Register">Sign up</a>
-                </div>
+                <div class="mr-2">@User.Identity.Name</div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-link text-red" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Context.Request.Host.Value">Logout</a>
+                }
+                else
+                {
+                    <a class="mr-2 nav-link text-dark" asp-controller="Account" asp-action="Register">Sign up</a>
+                    <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                }
             </div>
         </nav>
     </header>

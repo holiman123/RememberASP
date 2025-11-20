@@ -43,6 +43,11 @@ public class AccountController : Controller
         {
             _signInManager.SignInAsync(user, isPersistent: false);
         }
+        else
+        {
+            ViewData["Errors"] = creationResult.Errors;
+            return View();
+        }
 
         if (returnUrl is not null)
         {
@@ -59,7 +64,7 @@ public class AccountController : Controller
         if (email is null &&
             password is null)
         {
-            ViewData["ReturnUrl"] = Request.Headers.Referer.ToString();
+            ViewData["ReturnUrl"] = returnUrl ?? Request.Headers.Referer.ToString();
             return View();
         }
 
@@ -67,6 +72,17 @@ public class AccountController : Controller
         if (signedUser is not null)
         {
             var res = await _signInManager.PasswordSignInAsync(signedUser, password, false, false);
+
+            if (!res.Succeeded)
+            {
+                ViewData["Error"] = "Invalid password.";
+                return View();
+            }
+        }
+        else
+        {
+            ViewData["Error"] = "No user with this email found.";
+            return View();
         }
 
         if (returnUrl is not null)
@@ -77,5 +93,11 @@ public class AccountController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
+    }
+
+    public async Task<IActionResult> Logout(string? returnUrl = null)
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }
