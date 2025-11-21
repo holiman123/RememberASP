@@ -10,6 +10,9 @@ namespace RememberASP
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            FileLoggerProvider fileLogger = new FileLoggerProvider();
+            builder.Logging.AddProvider(fileLogger);
+
             builder.Services.AddScoped<LettersAppDbContext>(_ => 
                 new LettersAppDbContext(builder.Configuration.GetConnectionString("Default")));
 
@@ -30,6 +33,8 @@ namespace RememberASP
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            app.Logger.LogInformation("Application started.");
 
             // Configure the HTTP request pipeline.  
             if (!app.Environment.IsDevelopment())

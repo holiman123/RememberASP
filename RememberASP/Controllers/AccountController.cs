@@ -9,16 +9,16 @@ public class AccountController : Controller
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private static bool _databaseChecked;
-    private readonly ILogger _logger;
+    private readonly ILogger logger;
 
     public AccountController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        ILoggerFactory loggerFactory)
+        ILogger<LettersController> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        _logger = loggerFactory.CreateLogger<AccountController>();
+        logger = logger;
     }
 
     public async Task<IActionResult> Register(string username, string email, string password, string? returnUrl = null)
@@ -42,6 +42,8 @@ public class AccountController : Controller
         if (creationResult.Succeeded)
         {
             _signInManager.SignInAsync(user, isPersistent: false);
+
+            logger.LogInformation($"Registered new user: {username}, {email}");
         }
         else
         {
@@ -85,6 +87,8 @@ public class AccountController : Controller
             return View();
         }
 
+        logger.LogInformation($"User {signedUser.UserName} logged in.");
+
         if (returnUrl is not null)
         {
             return Redirect(returnUrl);
@@ -97,7 +101,11 @@ public class AccountController : Controller
 
     public async Task<IActionResult> Logout(string? returnUrl = null)
     {
+        string name = User.Identity.Name;
         await _signInManager.SignOutAsync();
+
+        logger.LogInformation($"User {name} logged out.");
+
         return RedirectToAction("Index", "Home");
     }
 }

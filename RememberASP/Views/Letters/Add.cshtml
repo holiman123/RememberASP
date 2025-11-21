@@ -3,8 +3,8 @@
 }
 
 <form id="form" class="form-class" asp-controller="Letters" asp-action="Add">
-	<input type="text" name="letter"/>
-	<textarea class="form-desc" name="description"></textarea>
+	<input type="text" name="letter" value="@ViewData["letter"]"/>
+	<textarea class="form-desc" name="description">@ViewData["desc"]</textarea>
 	<input type="submit" value="Submit"/>
 </form>
 

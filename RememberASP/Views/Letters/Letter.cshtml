@@ -13,3 +13,10 @@
 <p class="desc-description">
 	@Model.Description
 </p>
+<div class="d-inline">
+	<a asp-controller="Letters" asp-action="Add" asp-route-letter="@Model.Letter">Update</a>
+	@if(User.Identity.IsAuthenticated)
+	{
+		<a class="text-red" asp-controller="Letters" asp-action="Remove" asp-route-letter="@Model.Letter">Remove</a>
+	}
+</div>
