@@ -18,7 +18,7 @@ public class AccountController : Controller
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        logger = logger;
+        this.logger = logger;
     }
 
     public async Task<IActionResult> Register(string username, string email, string password, string? returnUrl = null)

@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RememberASP.Models;
 
 [PrimaryKey(nameof(Letter), [])]
 public class LetterModel
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.None)] // Prevent auto-increment
     public char Letter { get; set; }
 
     public string Description { get; set; }

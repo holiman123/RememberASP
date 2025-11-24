@@ -5,6 +5,10 @@
 
 appsettings.json
 
+#cloudflarte
+.dev.vars* 
+.env*
+
 # User-specific files
 *.rsuser
 *.suo
